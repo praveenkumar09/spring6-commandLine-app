@@ -7,6 +7,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.List;
+
 @SpringBootApplication
 public class Spring6CommandLineAppApplication {
 
@@ -19,8 +21,52 @@ public class Spring6CommandLineAppApplication {
 		return runner -> {
 			//createStudent(studentDAO);
 			//createMultipleStudent(studentDAO);
-			readStudent(studentDAO);
+			//readStudent(studentDAO);
+			//queryForStudents(studentDAO);
+			//queryByLastName(studentDAO);
+			//updateStudent(studentDAO);
+			deleteStudentById(studentDAO);
+			deleteStudentByLastName(studentDAO);
 		};
+	}
+
+	private void deleteStudentByLastName(StudentDAO studentDAO) {
+		System.out.println("Delete student by last name....");
+		int numOfRows = studentDAO.deleteStudentByLastName("Doe");
+		System.out.println("No of students deleted..."+numOfRows);
+	}
+
+	private void deleteStudentById(StudentDAO studentDAO) {
+		int studentId = 3;
+		System.out.println("Delete student by id...."+studentId);
+		Student student = studentDAO.findById(studentId);
+		studentDAO.delete(student);
+	}
+
+	private void updateStudent(StudentDAO studentDAO) {
+		int studentId = 1;
+		Student student = studentDAO.findById(studentId);
+		System.out.println("Updated student with id: " + studentId);
+		student.setFirstName("Scooby");
+		student.setEmail("scooby@gmail.com");
+		studentDAO.update(student);
+		System.out.println("Updated student: " + student);
+	}
+
+	private void queryByLastName(StudentDAO studentDAO) {
+		System.out.println("Querying by the last name...");
+		List<Student> students = studentDAO.findByLastName("Doe");
+		for (Student student : students) {
+			System.out.println(student);
+		}
+	}
+
+	private void queryForStudents(StudentDAO studentDAO) {
+		System.out.println("Querying for students....");
+		List<Student> students = studentDAO.findAll();
+		for(Student student : students){
+			System.out.println(student);
+		}
 	}
 
 	private void readStudent(StudentDAO studentDAO) {
