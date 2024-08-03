@@ -19,14 +19,14 @@ public class Spring6CommandLineAppApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(StudentDAO studentDAO){
 		return runner -> {
-			//createStudent(studentDAO);
-			//createMultipleStudent(studentDAO);
+			createStudent(studentDAO);
+			createMultipleStudent(studentDAO);
 			//readStudent(studentDAO);
 			//queryForStudents(studentDAO);
 			//queryByLastName(studentDAO);
 			//updateStudent(studentDAO);
-			deleteStudentById(studentDAO);
-			deleteStudentByLastName(studentDAO);
+			//deleteStudentById(studentDAO);
+			//deleteStudentByLastName(studentDAO);
 		};
 	}
 
@@ -37,10 +37,7 @@ public class Spring6CommandLineAppApplication {
 	}
 
 	private void deleteStudentById(StudentDAO studentDAO) {
-		int studentId = 3;
-		System.out.println("Delete student by id...."+studentId);
-		Student student = studentDAO.findById(studentId);
-		studentDAO.delete(student);
+		studentDAO.delete(3);
 	}
 
 	private void updateStudent(StudentDAO studentDAO) {

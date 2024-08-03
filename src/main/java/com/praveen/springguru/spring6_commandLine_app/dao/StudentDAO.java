@@ -12,6 +12,6 @@ public interface StudentDAO {
     List<Student> findByPredicateName(String firstName,String lastName);
     List<Student> findByEmail(String email);
     void update(Student student);
-    void delete(Student student);
+    void delete(Integer studentId);
     int deleteStudentByLastName(String lastName);
 }
