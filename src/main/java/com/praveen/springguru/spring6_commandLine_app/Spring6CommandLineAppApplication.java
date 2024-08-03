@@ -1,5 +1,7 @@
 package com.praveen.springguru.spring6_commandLine_app;
 
+import com.praveen.springguru.spring6_commandLine_app.dao.StudentDAO;
+import com.praveen.springguru.spring6_commandLine_app.entity.Student;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,10 +15,17 @@ public class Spring6CommandLineAppApplication {
 	}
 
 	@Bean
-	public CommandLineRunner commandLineRunner(){
+	public CommandLineRunner commandLineRunner(StudentDAO studentDAO){
 		return runner -> {
-			System.out.println("Hello World");
+			createStudent(studentDAO);
 		};
+	}
+
+	private void createStudent(StudentDAO studentDAO) {
+		System.out.println("Creating new student....");
+		Student tempStudent = new Student("Paul","Doe","pauldoe@gmail.com");
+		studentDAO.save(tempStudent);
+		System.out.println("New student created...."+tempStudent.getId());
 	}
 
 }
