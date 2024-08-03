@@ -17,8 +17,21 @@ public class Spring6CommandLineAppApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(StudentDAO studentDAO){
 		return runner -> {
-			createStudent(studentDAO);
+			//createStudent(studentDAO);
+			createMultipleStudent(studentDAO);
 		};
+	}
+
+	private void createMultipleStudent(StudentDAO studentDAO) {
+		System.out.println("Creating Multiple Student.......");
+		Student tmpStudent1 = new Student("Manu","Prasad","manu@gmail.com");
+		Student tmpStudent2 = new Student("Mika","Prasad","mika@gmail.com");
+		Student tmpStudent3 = new Student("Mayur","Prasad","mayur@gmail.com");
+
+		System.out.println("Saving student Objects.....");
+		studentDAO.save(tmpStudent1);
+		studentDAO.save(tmpStudent2);
+		studentDAO.save(tmpStudent3);
 	}
 
 	private void createStudent(StudentDAO studentDAO) {
